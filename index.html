@@ -124,6 +124,7 @@
 <nav>
     <div class="logo">IQ-VINTED</div>
     <div style="font-size: 0.8rem;">Vinde hainele de care ești prea deștept să le mai porți.</div>
+    <button id="nav-login-btn" class="btn" style="width: auto; padding: 5px 15px; display: none;" onclick="alert('Sry, login in progress')">Login</button>
 </nav>
 
 <div class="hero">
@@ -152,6 +153,13 @@
         <div id="quiz-view" class="hidden">
             <p id="q-text" style="font-weight: bold;">Întrebare...</p>
             <div id="options-box"></div>
+        </div>
+
+        <div id="success-view" class="hidden" style="text-align: center;">
+            <h3 style="color: var(--vinted-teal);">FELICITĂRI, GENIULE!</h3>
+            <p>Ai demonstrat că ai gusturi și creier.</p>
+            <button class="btn" onclick="alert('Sry, login in progress')">Login la Contul de Geniu</button>
+            <button class="btn btn-outline" onclick="showMarket()">Mergi la Marketplace</button>
         </div>
     </div>
 
@@ -248,10 +256,18 @@
         });
     }
 
+    // Funcția care arată marketplace-ul
+    function showMarket() {
+        document.getElementById('quiz-section').classList.add('hidden');
+        document.getElementById('market-section').classList.remove('hidden');
+        document.getElementById('nav-login-btn').style.display = 'block';
+    }
+
     function finish() {
         if (score === 3) {
-            document.getElementById('quiz-section').classList.add('hidden');
-            document.getElementById('market-section').classList.remove('hidden');
+            // Dacă răspunde corect, arătăm ecranul de succes cu butonul Login
+            document.getElementById('quiz-view').classList.add('hidden');
+            document.getElementById('success-view').classList.remove('hidden');
         } else {
             localStorage.setItem('vinted_iq_lock', 'true');
             document.getElementById('quiz-view').classList.add('hidden');
