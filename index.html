@@ -3,64 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IQ-VINTED | Haine deștepte pentru oameni și mai deștepți</title>
+    <title>IQ-VINTED | Haine deștepte</title>
     <style>
         :root {
             --vinted-teal: #007782;
-            --bg-light: #f5f6f7;
-            --white: #ffffff;
-            --error: #ff4d4d;
+            --vinted-dark: #111;
+            --bg: #f9fafb;
+            --white: #fff;
+            --debug-yellow: #ffcc00;
         }
 
+        * { box-sizing: border-box; }
         body {
-            background-color: var(--bg-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
             margin: 0;
-            color: #111;
+            color: var(--vinted-dark);
         }
 
-        /* Nav Bar */
+        /* Navigation */
         nav {
             background: var(--white);
-            padding: 15px 50px;
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #ddd;
         }
 
-        .logo { font-size: 24px; font-weight: bold; color: var(--vinted-teal); letter-spacing: -1px; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--vinted-teal); letter-spacing: -1px; }
 
+        /* Hero */
         .hero {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://www.transparenttextures.com/patterns/cubes.png');
-        }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
-
-        /* Card-ul de Test */
-        .quiz-card {
+            padding: 4rem 1rem 6rem;
             background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 40px;
-            max-width: 500px;
-            margin: -100px auto 40px;
-            position: relative;
-            z-index: 10;
         }
 
+        .container {
+            max-width: 1100px;
+            margin: -4rem auto 3rem;
+            padding: 0 1rem;
+        }
+
+        /* The Cards */
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 2rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Buttons */
         .btn {
             background: var(--vinted-teal);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 16px;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             width: 100%;
+            transition: 0.2s;
         }
 
         .btn-outline {
@@ -70,17 +77,45 @@
             margin-top: 10px;
         }
 
+        /* BIG DEBUG BUTTON */
+        .btn-debug-global {
+            background: var(--debug-yellow);
+            color: #000;
+            border: 2px solid #000;
+            padding: 15px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Quiz Options */
         .option {
             border: 1px solid #ddd;
-            padding: 12px;
+            padding: 1rem;
             margin: 10px 0;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             transition: 0.2s;
         }
         .option:hover { background: #f0f9f9; border-color: var(--vinted-teal); }
 
         /* Marketplace */
+        .market-header {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            gap: 1rem;
+        }
+
         .market-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -90,83 +125,76 @@
         .item-card {
             background: var(--white);
             border: 1px solid #eee;
-            border-radius: 4px;
+            border-radius: 8px;
             overflow: hidden;
         }
 
-        .item-img {
-            height: 250px;
-            background: #eee;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-        }
-
-        .item-info { padding: 15px; }
-        .price { font-weight: bold; font-size: 18px; }
-        .size { font-size: 12px; color: #666; text-transform: uppercase; }
-
-        .lockout-overlay {
-            background: rgba(255, 77, 77, 0.1);
-            border: 1px solid var(--error);
-            color: var(--error);
-            padding: 20px;
-            border-radius: 4px;
-            text-align: center;
-        }
+        .item-img { height: 250px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .item-info { padding: 1rem; }
+        .price { font-weight: bold; font-size: 1.2rem; }
 
         .hidden { display: none !important; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            nav { padding: 1rem; flex-direction: column; text-align: center; gap: 10px; }
+            .market-header { flex-direction: column; text-align: center; }
+            .btn-debug-global { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
 <nav>
     <div class="logo">IQ-VINTED</div>
-    <div style="font-size: 0.8rem;">Vinde hainele de care ești prea deștept să le mai porți.</div>
-    <button id="nav-login-btn" class="btn" style="width: auto; padding: 5px 15px; display: none;" onclick="alert('Sry, login in progress')">Login</button>
+    <div style="font-size: 0.9rem;">Haine deștepte pentru oameni și mai deștepți.</div>
 </nav>
 
-<div class="hero">
+<div id="hero-section" class="hero">
     <h1>Ești destul de "fashion-forward" pentru noi?</h1>
-    <p>Doar utilizatorii cu IQ > 115 pot cumpăra sau vinde aici. <br>Fără haine urâte, fără logică proastă.</p>
+    <p>Doar utilizatorii cu IQ > 115 pot cumpăra sau vinde aici.</p>
 </div>
 
 <div class="container">
     
-    <div id="quiz-section" class="quiz-card">
+    <div id="quiz-section" class="card">
         <div id="start-view">
             <h3>Test de Intrare Rapid</h3>
-            <p style="color: #666; font-size: 0.9rem;">Dovedește că meriți să porți haine de firmă răspunzând la 3 întrebări de logică.</p>
+            <p>Dovedește că meriți să porți haine de firmă răspunzând la 3 întrebări de logică.</p>
             
             <div id="lockout-msg" class="hidden">
-                <div class="lockout-overlay">
+                <div style="background:#fee2e2; border: 1px solid #ef4444; color:#b91c1c; padding: 1rem; border-radius: 6px; margin-bottom:1rem;">
                     <strong>ACCES REFUZAT!</strong><br>
-                    Ești prea "fashion-victim". Reîncearcă peste 30 de zile când îți mai revine logica.
+                    Ești prea "fashion-victim". Reîncearcă când îți mai revine logica.
                 </div>
-                <button class="btn btn-outline" onclick="resetDebug()">[DEBUG] Șterge restricția</button>
+                <button class="btn-debug-global" onclick="resetDebug()">🛠️ DEBUG: ȘTERGE RESTRICȚIA</button>
             </div>
 
             <button id="start-btn" class="btn" onclick="startQuiz()">Sunt un geniu, lasă-mă să cumpăr</button>
         </div>
 
         <div id="quiz-view" class="hidden">
-            <p id="q-text" style="font-weight: bold;">Întrebare...</p>
+            <p id="q-text" style="font-weight: bold; font-size: 1.1rem;">Întrebare...</p>
             <div id="options-box"></div>
         </div>
 
         <div id="success-view" class="hidden" style="text-align: center;">
             <h3 style="color: var(--vinted-teal);">FELICITĂRI, GENIULE!</h3>
             <p>Ai demonstrat că ai gusturi și creier.</p>
-            <button class="btn" onclick="alert('Sry, login in progress')">Login la Contul de Geniu</button>
-            <button class="btn btn-outline" onclick="showMarket()">Mergi la Marketplace</button>
+            <button class="btn" onclick="showMarket()">Mergi la Marketplace</button>
+            <button class="btn-debug-global" onclick="resetDebug()">🛠️ DEBUG: RESETEAZĂ TOT</button>
         </div>
     </div>
 
     <div id="market-section" class="hidden">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-            <h3>Haine proaspăt validate de genii</h3>
-            <span style="color: var(--vinted-teal); font-weight: bold;">Status: Geniu Confirmat ✅</span>
+        <div class="market-header">
+            <div>
+                <h2 style="margin:0">Haine validate de genii</h2>
+                <span style="color: var(--vinted-teal); font-weight: bold;">Status: Geniu Confirmat ✅</span>
+            </div>
+            <div style="min-width: 250px;">
+                <button class="btn-debug-global" style="margin:0" onclick="resetDebug()">🛠️ DEBUG: LOGOUT & RESET</button>
+            </div>
         </div>
         
         <div class="market-grid">
@@ -174,32 +202,32 @@
                 <div class="item-img">🧥</div>
                 <div class="item-info">
                     <div class="price">120 RON</div>
-                    <div class="size">M / L / 130 IQ</div>
-                    <div style="font-size: 0.9rem;">Hanorac cu care am luat 10 la bac.</div>
+                    <div style="color:#666; font-size: 0.8rem;">M / L / 130 IQ</div>
+                    <div style="margin-top:5px;">Hanorac cu care am luat 10 la bac.</div>
                 </div>
             </div>
             <div class="item-card">
                 <div class="item-img">👟</div>
                 <div class="item-info">
                     <div class="price">450 RON</div>
-                    <div class="size">42 / Nike "Logos"</div>
-                    <div style="font-size: 0.9rem;">Adidași pentru mers la bibliotecă.</div>
+                    <div style="color:#666; font-size: 0.8rem;">42 / Nike "Logos"</div>
+                    <div style="margin-top:5px;">Adidași pentru mers la bibliotecă.</div>
                 </div>
             </div>
             <div class="item-card">
                 <div class="item-img">🕶️</div>
                 <div class="item-info">
                     <div class="price">80 RON</div>
-                    <div class="size">Unisex / Smart</div>
-                    <div style="font-size: 0.9rem;">Ochelari care te fac să pari mai inteligent.</div>
+                    <div style="color:#666; font-size: 0.8rem;">Unisex / Smart</div>
+                    <div style="margin-top:5px;">Ochelari care te fac să pari inteligent.</div>
                 </div>
             </div>
             <div class="item-card">
                 <div class="item-img">🧶</div>
                 <div class="item-info">
                     <div class="price">30 RON</div>
-                    <div class="size">S / Vintage</div>
-                    <div style="font-size: 0.9rem;">Pulover de lână de la bunica (fostă profesoară de fizică).</div>
+                    <div style="color:#666; font-size: 0.8rem;">S / Vintage</div>
+                    <div style="margin-top:5px;">Pulover de lână de la bunica.</div>
                 </div>
             </div>
         </div>
@@ -217,8 +245,7 @@
     let score = 0;
 
     function checkLock() {
-        const lock = localStorage.getItem('vinted_iq_lock');
-        if (lock) {
+        if (localStorage.getItem('vinted_iq_lock')) {
             document.getElementById('start-btn').classList.add('hidden');
             document.getElementById('lockout-msg').classList.remove('hidden');
             return true;
@@ -239,10 +266,7 @@
     }
 
     function loadQ() {
-        if (currentQ >= QUESTIONS.length) {
-            finish();
-            return;
-        }
+        if (currentQ >= QUESTIONS.length) { finish(); return; }
         const q = QUESTIONS[currentQ];
         document.getElementById('q-text').innerText = q.q;
         const box = document.getElementById('options-box');
@@ -256,16 +280,14 @@
         });
     }
 
-    // Funcția care arată marketplace-ul
     function showMarket() {
+        document.getElementById('hero-section').classList.add('hidden');
         document.getElementById('quiz-section').classList.add('hidden');
         document.getElementById('market-section').classList.remove('hidden');
-        document.getElementById('nav-login-btn').style.display = 'block';
     }
 
     function finish() {
         if (score === 3) {
-            // Dacă răspunde corect, arătăm ecranul de succes cu butonul Login
             document.getElementById('quiz-view').classList.add('hidden');
             document.getElementById('success-view').classList.remove('hidden');
         } else {
