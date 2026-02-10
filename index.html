@@ -3,143 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IQ-VINTED | Haine deștepte</title>
+    <title>IQ-VINTED | Elite Fashion</title>
     <style>
         :root {
             --vinted-teal: #007782;
-            --vinted-dark: #111;
-            --bg: #f9fafb;
-            --white: #fff;
-            --debug-yellow: #ffcc00;
+            --accent-gradient: linear-gradient(135deg, #007782 0%, #00aeb5 100%);
+            --bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --debug-color: #f59e0b;
         }
 
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        
         body {
             background-color: var(--bg);
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             margin: 0;
-            color: var(--vinted-dark);
+            color: var(--text-main);
+            min-height: 100vh;
         }
 
-        /* Navigation */
+        /* Nav Bar */
         nav {
-            background: var(--white);
-            padding: 1rem 5%;
+            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.8);
+            padding: 1.5rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--vinted-teal); letter-spacing: -1px; }
+        .logo { font-size: 1.8rem; font-weight: 900; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
             text-align: center;
-            padding: 4rem 1rem 6rem;
-            background: var(--white);
+            padding: 5rem 1rem;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: -4rem auto 3rem;
-            padding: 0 1rem;
-        }
+        .hero h1 { font-size: 3.5rem; margin: 0; font-weight: 800; letter-spacing: -1px; }
+        .hero p { color: var(--text-dim); font-size: 1.2rem; margin-top: 1rem; }
 
-        /* The Cards */
-        .card {
-            background: var(--white);
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            padding: 2rem;
-            max-width: 500px;
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+
+        /* Modern Glass Card */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 600px;
             margin: 0 auto;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
         }
 
         /* Buttons */
         .btn {
-            background: var(--vinted-teal);
+            background: var(--accent-gradient);
             color: white;
             border: none;
-            padding: 1rem;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 600;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
-            transition: 0.2s;
+            box-shadow: 0 10px 15px -3px rgba(0, 119, 130, 0.4);
         }
 
-        .btn-outline {
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgba(0, 119, 130, 0.5); }
+
+        .btn-debug {
             background: transparent;
-            border: 1px solid var(--vinted-teal);
-            color: var(--vinted-teal);
-            margin-top: 10px;
-        }
-
-        /* BIG DEBUG BUTTON */
-        .btn-debug-global {
-            background: var(--debug-yellow);
-            color: #000;
-            border: 2px solid #000;
-            padding: 15px;
-            font-weight: 900;
+            border: 2px dashed var(--debug-color);
+            color: var(--debug-color);
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 12px;
+            font-weight: 800;
             text-transform: uppercase;
             cursor: pointer;
-            border-radius: 8px;
             width: 100%;
-            margin-top: 20px;
         }
+
+        .btn-debug:hover { background: var(--debug-color); color: #000; }
 
         /* Quiz Options */
         .option {
-            border: 1px solid #ddd;
-            padding: 1rem;
-            margin: 10px 0;
-            border-radius: 8px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 15px;
             cursor: pointer;
-            transition: 0.2s;
         }
-        .option:hover { background: #f0f9f9; border-color: var(--vinted-teal); }
+        .option:hover { background: rgba(255,255,255,0.1); border-color: var(--vinted-teal); padding-left: 1.5rem; }
 
-        /* Marketplace */
+        /* Marketplace Grid */
         .market-header {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 2rem;
         }
 
         .market-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
         }
 
         .item-card {
-            background: var(--white);
-            border: 1px solid #eee;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
             overflow: hidden;
+            position: relative;
         }
 
-        .item-img { height: 250px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
-        .item-info { padding: 1rem; }
-        .price { font-weight: bold; font-size: 1.2rem; }
+        .item-card:hover { border-color: var(--vinted-teal); transform: scale(1.02); }
+
+        .item-img {
+            height: 320px;
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+        }
+
+        .item-info { padding: 1.5rem; }
+        .price { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .tag { font-size: 0.7rem; background: var(--vinted-teal); padding: 2px 8px; border-radius: 4px; text-transform: uppercase; margin-bottom: 8px; display: inline-block; }
 
         .hidden { display: none !important; }
 
-        /* Mobile Adjustments */
-        @media (max-width: 600px) {
-            nav { padding: 1rem; flex-direction: column; text-align: center; gap: 10px; }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
             .market-header { flex-direction: column; text-align: center; }
-            .btn-debug-global { width: 100%; }
         }
     </style>
 </head>
@@ -147,53 +158,58 @@
 
 <nav>
     <div class="logo">IQ-VINTED</div>
-    <div style="font-size: 0.9rem;">Haine deștepte pentru oameni și mai deștepți.</div>
+    <div style="color: var(--text-dim); font-weight: 500;">Haine deștepte. Oameni și mai deștepți.</div>
 </nav>
 
-<div id="hero-section" class="hero">
-    <h1>Ești destul de "fashion-forward" pentru noi?</h1>
-    <p>Doar utilizatorii cu IQ > 115 pot cumpăra sau vinde aici.</p>
+<div id="hero-main" class="hero">
+    <h1>Stilul tău are nevoie de un creier?</h1>
+    <p>Locul unde hainele au mai multă logică decât unii influenceri.</p>
 </div>
 
 <div class="container">
     
-    <div id="quiz-section" class="card">
+    <div id="quiz-section" class="glass-card">
         <div id="start-view">
-            <h3>Test de Intrare Rapid</h3>
-            <p>Dovedește că meriți să porți haine de firmă răspunzând la 3 întrebări de logică.</p>
+            <h2 style="margin-top:0">Verificarea Materiei Cenușii</h2>
+            <p style="color: var(--text-dim)">Dovedește că meriți să porți haine de firmă. Treci testul de 3 întrebări sau rămâi la pijamale.</p>
             
             <div id="lockout-msg" class="hidden">
-                <div style="background:#fee2e2; border: 1px solid #ef4444; color:#b91c1c; padding: 1rem; border-radius: 6px; margin-bottom:1rem;">
-                    <strong>ACCES REFUZAT!</strong><br>
-                    Ești prea "fashion-victim". Reîncearcă când îți mai revine logica.
+                <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; color: #f87171; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem;">
+                    <strong>ACCES INTERZIS!</strong><br>
+                    Ești prea "fashion-victim". IQ-ul tău vestimentar e la nivel de șlapi cu șosete.
                 </div>
-                <button class="btn-debug-global" onclick="resetDebug()">🛠️ DEBUG: ȘTERGE RESTRICȚIA</button>
+                <button class="btn-debug" onclick="resetDebug()">🛠️ DEBUG: FORCE UNLOCK</button>
             </div>
 
-            <button id="start-btn" class="btn" onclick="startQuiz()">Sunt un geniu, lasă-mă să cumpăr</button>
+            <button id="start-btn" class="btn" onclick="startQuiz()">Sunt un geniu, deblochează shop-ul</button>
         </div>
 
         <div id="quiz-view" class="hidden">
-            <p id="q-text" style="font-weight: bold; font-size: 1.1rem;">Întrebare...</p>
+            <div id="q-progress" style="color: var(--vinted-teal); font-weight: bold; margin-bottom: 1rem;">Pasul 1/3</div>
+            <p id="q-text" style="font-weight: 700; font-size: 1.3rem; margin-bottom: 2rem;">Se încarcă logica...</p>
             <div id="options-box"></div>
         </div>
 
         <div id="success-view" class="hidden" style="text-align: center;">
-            <h3 style="color: var(--vinted-teal);">FELICITĂRI, GENIULE!</h3>
-            <p>Ai demonstrat că ai gusturi și creier.</p>
-            <button class="btn" onclick="showMarket()">Mergi la Marketplace</button>
-            <button class="btn-debug-global" onclick="resetDebug()">🛠️ DEBUG: RESETEAZĂ TOT</button>
+            <div style="font-size: 5rem; margin-bottom: 1rem;">💎</div>
+            <h2 style="color: var(--vinted-teal)">ACCES COMPLET DEBLOCAT</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Ai demonstrat că ai și gusturi, și neuroni. Poți intra în Marketplace.</p>
+            <button class="btn" onclick="showMarket()">Vezi Colecția de Geniu</button>
+            <button class="btn-debug" onclick="resetDebug()">🛠️ DEBUG: RESET SYSTEM</button>
         </div>
     </div>
 
     <div id="market-section" class="hidden">
         <div class="market-header">
             <div>
-                <h2 style="margin:0">Haine validate de genii</h2>
-                <span style="color: var(--vinted-teal); font-weight: bold;">Status: Geniu Confirmat ✅</span>
+                <h2 style="font-size: 2.5rem; margin:0">Marketplace de Elită</h2>
+                <div style="margin-top: 10px;">
+                    <span class="tag">Geniu Verificat ✅</span>
+                    <span class="tag" style="background: #334155;">3 Obiecte în coș</span>
+                </div>
             </div>
-            <div style="min-width: 250px;">
-                <button class="btn-debug-global" style="margin:0" onclick="resetDebug()">🛠️ DEBUG: LOGOUT & RESET</button>
+            <div style="width: 300px;">
+                <button class="btn-debug" style="margin:0" onclick="resetDebug()">🛠️ DEBUG: LOGOUT & LOCKOUT</button>
             </div>
         </div>
         
@@ -201,33 +217,49 @@
             <div class="item-card">
                 <div class="item-img">🧥</div>
                 <div class="item-info">
+                    <span class="tag">Premium IQ</span>
                     <div class="price">120 RON</div>
-                    <div style="color:#666; font-size: 0.8rem;">M / L / 130 IQ</div>
-                    <div style="margin-top:5px;">Hanorac cu care am luat 10 la bac.</div>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Hanorac cu care am luat 10 la bac. Materialul e impregnat cu cunoștințe de filosofie.</p>
                 </div>
             </div>
             <div class="item-card">
                 <div class="item-img">👟</div>
                 <div class="item-info">
+                    <span class="tag">Smart Steps</span>
                     <div class="price">450 RON</div>
-                    <div style="color:#666; font-size: 0.8rem;">42 / Nike "Logos"</div>
-                    <div style="margin-top:5px;">Adidași pentru mers la bibliotecă.</div>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Nike "Logos". Adidași concepuți special pentru drumurile lungi spre bibliotecă.</p>
                 </div>
             </div>
             <div class="item-card">
                 <div class="item-img">🕶️</div>
                 <div class="item-info">
+                    <span class="tag">Visionary</span>
                     <div class="price">80 RON</div>
-                    <div style="color:#666; font-size: 0.8rem;">Unisex / Smart</div>
-                    <div style="margin-top:5px;">Ochelari care te fac să pari inteligent.</div>
+                    <div style="font-size: 0.9rem;">Ochelari care te fac să pari mai inteligent decât ești de fapt (recomandat pentru ședințe).</div>
                 </div>
             </div>
             <div class="item-card">
                 <div class="item-img">🧶</div>
                 <div class="item-info">
+                    <span class="tag">Vintage Logic</span>
                     <div class="price">30 RON</div>
-                    <div style="color:#666; font-size: 0.8rem;">S / Vintage</div>
-                    <div style="margin-top:5px;">Pulover de lână de la bunica.</div>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Pulover de lână de la bunica (fostă profesoară de fizică). Încălzește și corpul, și mintea.</p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img">🎩</div>
+                <div class="item-info">
+                    <span class="tag">Thinker's Cap</span>
+                    <div class="price">55 RON</div>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Pălărie pentru momentele când vrei să pari misterios, dar de fapt calculezi facturi.</p>
+                </div>
+            </div>
+            <div class="item-card">
+                <div class="item-img">💼</div>
+                <div class="item-info">
+                    <span class="tag">Data Carrier</span>
+                    <div class="price">210 RON</div>
+                    <p style="color: var(--text-dim); font-size: 0.9rem;">Geantă diplomată. Perfectă pentru purtat sandwich-uri la birou, dar pare că ai contracte de milioane.</p>
                 </div>
             </div>
         </div>
@@ -236,9 +268,9 @@
 
 <script>
     const QUESTIONS = [
-        { q: "Dacă un stilist are 3 eșarfe și le vinde pe toate cu 0 lei, ce are stilistul acum?", opts: ["Bani", "Foame", "Ghinion", "Un business plan prost"], correct: 3 },
-        { q: "Câte perechi de șosete ai nevoie pentru 3 picioare?", opts: ["2 perechi", "3 perechi", "1.5 perechi", "Depinde de mărime"], correct: 0 },
-        { q: "Ce cuvânt urmează? Gucci, Prada, Versace, ...", opts: ["Lidl", "Armani", "Pepco", "Târgul de Vechituri"], correct: 1 }
+        { q: "Dacă un stilist are 3 eșarfe și le vinde pe toate cu 0 lei, ce are stilistul acum?", opts: ["Un profit imens", "Foame", "Un business plan prost", "Ghinion la zaruri"], correct: 2 },
+        { q: "Câte perechi de șosete ai nevoie pentru 3 picioare?", opts: ["2 perechi", "3 perechi", "1.5 perechi (logic!)", "Depinde de sezon"], correct: 0 },
+        { q: "Urmează seria: Gucci, Prada, Versace, ...", opts: ["Lidl", "Armani", "Pepco", "Târgul de Vechituri"], correct: 1 }
     ];
 
     let currentQ = 0;
@@ -268,6 +300,7 @@
     function loadQ() {
         if (currentQ >= QUESTIONS.length) { finish(); return; }
         const q = QUESTIONS[currentQ];
+        document.getElementById('q-progress').innerText = `Pasul ${currentQ + 1}/3`;
         document.getElementById('q-text').innerText = q.q;
         const box = document.getElementById('options-box');
         box.innerHTML = '';
@@ -281,9 +314,10 @@
     }
 
     function showMarket() {
-        document.getElementById('hero-section').classList.add('hidden');
+        document.getElementById('hero-main').classList.add('hidden');
         document.getElementById('quiz-section').classList.add('hidden');
         document.getElementById('market-section').classList.remove('hidden');
+        window.scrollTo(0,0);
     }
 
     function finish() {
